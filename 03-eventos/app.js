@@ -1,4 +1,6 @@
 //Importaciones
+import { validar, validarCampo, validarNumeros, validarPalabras } from "./modulos.js";
+
 // Variables
 const formulario = document.querySelector("form");
 let nombre = document.querySelector('[name = "nombre"]');
@@ -7,53 +9,32 @@ let telefono = document.querySelector('[name = "telefono"]');
 let documento = document.querySelector('[name = "documento"]');
 let usuario = document.querySelector('[name = "usuario"]');
 let contrasena = document.querySelector('[name = "contrasena"]');
-const datos = [nombre, apellido, telefono, documento, usuario, contrasena];
-// let btn = document.querySelector("#btn_validar");
+let politicas = document.querySelector('#politicas');
+let boton = document.querySelector("#btn_validar");
+
+// const datos = [nombre, apellido, telefono, documento, usuario, contrasena];
 
 // Funciones
-const validar = event => {
-  let valido = false;
-  datos.forEach(dato => {
-    if (dato.value.trim() == "") valido = true;
-  });
+const habilitarBoton = () => {
+  if (!politicas.checked) boton.setAttribute('disabled', '');
+  else boton.removeAttribute('disabled');
+}
 
-  if (valido) {
-    alert("Llene todos los campos");
-    event.preventDefault();
-  }
-};
-
-const validarPalabras = event => {
-  if (!/[a-zñáéíóú\s]/i.test(event.key)) {
-    event.preventDefault();
-  }
-};
-
-const validarNumeros = event => {
-  if (!/[0-9]/.test(event.key) && event.key != "Backspace") {
-    event.preventDefault();
-  }
-};
-
-const validarContrasena = event => {
-  if(!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(contrasena.value)){
-    alert("Contraseña Inválida!\n\n" +
-      "La contraseña debería cumplir con:\n" +
-      "- 1 Mayúscula\n" +
-      "- 1 Caracter especial\n" +
-      "- 1 número\n" +
-      "- Mínimo 8 carcteres"
-    );
-    console.log(contrasena.value);
-    
-    event.preventDefault();
-  }
-};
 // Eventos
+addEventListener("DOMContentLoaded", habilitarBoton);
+
+politicas.addEventListener("change", habilitarBoton);
+
 formulario.addEventListener('submit', validar);
-formulario.addEventListener('submit', validarContrasena);
 
 nombre.addEventListener('keydown', validarPalabras);
 apellido.addEventListener('keydown', validarPalabras);
 telefono.addEventListener('keydown', validarNumeros);
 documento.addEventListener('keydown', validarNumeros);
+
+nombre.addEventListener('blur', validarCampo);
+apellido.addEventListener('blur', validarCampo);
+telefono.addEventListener('blur', validarCampo);
+documento.addEventListener('blur', validarCampo);
+usuario.addEventListener('blur', validarCampo);
+contrasena.addEventListener('blur', validarCampo);
