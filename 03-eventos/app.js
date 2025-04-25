@@ -12,13 +12,15 @@ const datos = [nombre, apellido, telefono, documento, usuario, contrasena];
 
 // Funciones
 const validar = event => {
-  event.preventDefault();
   let valido = false;
   datos.forEach(dato => {
     if (dato.value.trim() == "") valido = true;
   });
 
-  if (valido) alert("Llene todos los campos");
+  if (valido) {
+    alert("Llene todos los campos");
+    event.preventDefault();
+  }
 };
 
 const validarPalabras = event => {
@@ -32,8 +34,24 @@ const validarNumeros = event => {
     event.preventDefault();
   }
 };
+
+const validarContrasena = event => {
+  if(!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(contrasena.value)){
+    alert("Contraseña Inválida!\n\n" +
+      "La contraseña debería cumplir con:\n" +
+      "- 1 Mayúscula\n" +
+      "- 1 Caracter especial\n" +
+      "- 1 número\n" +
+      "- Mínimo 8 carcteres"
+    );
+    console.log(contrasena.value);
+    
+    event.preventDefault();
+  }
+};
 // Eventos
 formulario.addEventListener('submit', validar);
+formulario.addEventListener('submit', validarContrasena);
 
 nombre.addEventListener('keydown', validarPalabras);
 apellido.addEventListener('keydown', validarPalabras);
