@@ -1,10 +1,3 @@
-const campos = [];
-
-const obtenercampos = (e) => {
-  e.tar
-}
-
-
 export const agregarAdvertencia = campo => {
   campo.classList.add("border-red");
   if (campo.nextElementSibling) campo.nextElementSibling.remove();
@@ -30,28 +23,33 @@ export const validar = event => {
     }
   });
 
+  const datos = {};
   campos.forEach(campo => {
-
     switch (campo.tagName) {
       case 'INPUT':
-        console.log(campo.type);
+        // console.log(campo.type);
         break;
     
       case 'SELECT':
-      console.log(campo.type);
+        // console.log(campo.type);
         break;
       
       default:
         break;
     }
 
+    let nombreCampo = campo.getAttribute('name');
 
-    if (campo.value.trim() == "") agregarAdvertencia(campo);
+    if (campo.value.trim() == "" || campo.selectedIndex == 0) agregarAdvertencia(campo);
   
-    else if (campo.className == "border-red") removerAdvertencia(campo);
-
-    // if (campo.value.trim() != "") validarContrasena();
+    else if (campo.className == "border-red") {
+      removerAdvertencia(campo);
+    }
+    
+    else datos[nombreCampo] = campo.value;
   });
+
+  if(Object.keys(datos).length > 0) console.log(datos);
 };
 
 
@@ -85,5 +83,6 @@ export const validarContrasena = event => {
 
 export const validarCampo = event => {
   let campo = event.target;
-  if (campo.value.trim() != "" && campo.className == "border-red") removerAdvertencia(campo);
+  if (campo.value.trim() != "" && campo.className == "border-red" ) removerAdvertencia(campo);
+  // if (campo.tagName == "SELECT" && campo.selectedIndex != 0 && campo.className == "border-red" ) removerAdvertencia(campo);
 }
