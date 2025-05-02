@@ -181,8 +181,25 @@ button:hover {
   margin-left: 20px;
 }
 
-.politicas {
+.politicas, .lenguajes {
   display: inline-block;
   width: 20px;
   margin-left: 20px;
+}
+
+.genero__titulo, .lenguajes__titulo {
+  display: block;
+  margin-left: 25px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+input[type = "radio"] {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.genero__nombre {
+  margin-left: 25px;
 }

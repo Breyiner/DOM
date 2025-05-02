@@ -1,4 +1,4 @@
-export const agregarAdvertencia = campo => {
+const agregarAdvertencia = campo => {
   campo.classList.add("border-red");
   if (campo.nextElementSibling) campo.nextElementSibling.remove();
   
@@ -8,48 +8,87 @@ export const agregarAdvertencia = campo => {
   campo.insertAdjacentElement("afterEnd", advertencia);
 };
 
-export const removerAdvertencia = campo => {
+const removerAdvertencia = campo => {
   campo.classList.remove("border-red");
   let advertencia = document.querySelector(".advertencia");
   advertencia.remove();
 }
 
+const crearTabla = () => {
+  let carta = document.querySelector('.card');
+  
+  let tablaDatos = document.createElement("table");
+  let fila = document.createElement("tr");
+  let cabecera = document.createElement("th");
+  
+  tablaDatos.appendChild(fila);
+  cabecera.textContent = "Hola";
+  fila.append(cabecera);
+  carta.parentElement.parentElement.insertAdjacentElement('afterend', tablaDatos);
+}
+
 export const validar = event => {
   event.preventDefault();
-
   const campos = [...event.target].filter(elemento => {
     if (elemento.hasAttribute('required')) {
       return elemento;
     }
   });
-
+  
   const datos = {};
   campos.forEach(campo => {
     switch (campo.tagName) {
       case 'INPUT':
-        // console.log(campo.type);
+        if (campo.value.trim() == "") {
+          agregarAdvertencia(campo);
+          datos[campo.name] = campo.value;
+        }
         break;
-    
+        
       case 'SELECT':
-        // console.log(campo.type);
+        if (campo.selectedIndex === 0) {
+          agregarAdvertencia(campo);
+          datos[campo.name] = "";
+        }
+        else datos[campo.name] = campo.selectedIndex
+          ;
         break;
-      
+
       default:
         break;
     }
-
-    let nombreCampo = campo.getAttribute('name');
-
-    if (campo.value.trim() == "" || campo.selectedIndex == 0) agregarAdvertencia(campo);
-  
-    else if (campo.className == "border-red") {
-      removerAdvertencia(campo);
-    }
-    
-    else datos[nombreCampo] = campo.value;
   });
 
-  if(Object.keys(datos).length > 0) console.log(datos);
+
+  let radios = [...campos].filter(elemento => {
+    if (elemento.type == "radio") {
+      return elemento;
+    }
+  });
+  
+
+  let checkeado = radios.find(radio => radio.checked) || [];
+
+  if (checkeado.length === 0) datos[radios[0].name] = "";
+  else datos[checkeado.name] = checkeado.value;
+
+
+  let checkbox = [...campos].filter(checkbox => {
+    if (checkbox.type == "checkbox") return checkbox;
+  });
+
+  
+  let campos_checkbox = [...checkbox].filter(checkbox => checkbox.checked);
+
+  let elemento = document.querySelector('.form__lenguajes');
+  let cantidadLenguajes = elemento.dataset.lenguajes;
+
+
+  if (campos_checkbox.length < cantidadLenguajes) datos[checkbox[0].name] = "";
+  else datos[checkbox[0].name] = [...campos_checkbox].map(elemento => elemento.value);
+
+  console.log(datos);
+  
 };
 
 

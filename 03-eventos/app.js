@@ -7,13 +7,14 @@ let nombre = document.querySelector('[name = "nombre"]');
 let apellido = document.querySelector('[name = "apellido"]');
 let telefono = document.querySelector('[name = "telefono"]');
 let ciudad = document.querySelector('[name = "ciudad"]');
+let genero = document.querySelector('[name="genero"]');
 let documento = document.querySelector('[name = "documento"]');
 let usuario = document.querySelector('[name = "usuario"]');
 let contrasena = document.querySelector('[name = "contrasena"]');
 let politicas = document.querySelector('#politicas');
 let boton = document.querySelector("#btn_validar");
 
-// const datos = [nombre, apellido, telefono, documento, usuario, contrasena];
+const datos = [nombre, apellido, telefono, documento, usuario, contrasena];
 
 // Funciones
 const habilitarBoton = () => {
@@ -27,6 +28,7 @@ addEventListener("DOMContentLoaded", habilitarBoton);
 politicas.addEventListener("change", habilitarBoton);
 
 formulario.addEventListener('submit', validar);
+// formulario.addEventListener('submit', crearTabla);
 
 nombre.addEventListener('keydown', validarPalabras);
 apellido.addEventListener('keydown', validarPalabras);
@@ -37,6 +39,7 @@ nombre.addEventListener('blur', validarCampo);
 apellido.addEventListener('blur', validarCampo);
 telefono.addEventListener('blur', validarCampo);
 ciudad.addEventListener('blur', validarCampo);
+genero.addEventListener('blur', validarCampo);
 documento.addEventListener('blur', validarCampo);
 usuario.addEventListener('blur', validarCampo);
 contrasena.addEventListener('blur', validarCampo);

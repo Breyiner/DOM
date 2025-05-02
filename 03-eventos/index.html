@@ -46,8 +46,59 @@
                 <input type="password" name="contrasena" placeholder="Contraseña" autocomplete="off" required>
               </div>
               <div class="form__control">
-                <input type="checkbox" id="politicas" class="politicas">
-                <label for="politicas">Acepta las políticas de privacidad.</label>
+                <label class="genero__titulo">Genero:</label>
+                <label class="genero__nombre">
+                  <input type="radio" name="genero" value="1" required>
+                  Hombre
+                </label>
+                <label class="genero__nombre">
+                  <input type="radio" name="genero" value="2" required>
+                  Mujer
+                </label>
+              </div>
+              <div class="form__lenguajes" data-lenguajes="3">
+                <label class="lenguajes__titulo">Lenguajes:</label>
+                <label for="html">
+                  <input type="checkbox" name="lenguajes" id="html" value="1" class="lenguajes" required>
+                  HTML
+                </label>
+                <br>
+                <label for="css">
+                  <input type="checkbox" name="lenguajes" id="css" value="2" class="lenguajes" required>
+                  CSS
+                </label>
+                <br>
+                <label for="javascript">
+                  <input type="checkbox" name="lenguajes" id="javascript" value="3" class="lenguajes" required>
+                  JAVASCRIPT
+                </label>
+                <br>
+                <label for="php">
+                  <input type="checkbox" name="lenguajes" id="php" value="4" class="lenguajes" required>
+                  PHP
+                </label>
+                <br>
+                <label for="java">
+                  <input type="checkbox" name="lenguajes" id="java" value="5" class="lenguajes" required>
+                  JAVA
+                </label>
+                <br>
+                <label for="c#">
+                  <input type="checkbox" name="lenguajes" id="c#" value="6" class="lenguajes" required>
+                  C#
+                </label>
+                <br>
+                <label for="sql">
+                  <input type="checkbox" name="lenguajes" id="sql" value="7" class="lenguajes" required>
+                  SQL
+                </label>
+              </div>
+              <br>
+              <div class="form__control">
+                <label for="politicas">
+                  <input type="checkbox" id="politicas" class="politicas">
+                  Acepta las políticas de privacidad.
+                </label>
               </div>
               <button type="submit" id="btn_validar">Validar</button>
             </form>
